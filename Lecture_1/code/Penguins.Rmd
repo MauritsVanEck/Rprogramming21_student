@@ -29,7 +29,8 @@ This error message means that you did not install the package `palmerpenguins`. 
 
 ```{r}
 # Your code here
-
+library(tidyverse)
+library(palmerpenguins)
 ```
 
 
@@ -57,6 +58,8 @@ data("penguins")
 
 ```{r}
 summary(penguins)
+head(penguins)
+summary(penguins)
 ```
 
 The dataset contains 8 variables about 344 individual penguins. If you want to know what all variables mean you can use the command `?penguins` and an description of this dataset will appear at the bottom right of your screen.
@@ -65,7 +68,8 @@ The dataset contains 8 variables about 344 individual penguins. If you want to k
 
 
 ```{r}
-# Your code here to explore the penguins dataset
+# write here your code
+?penguins
 
 ```
 
@@ -86,7 +90,8 @@ we get rid of the NA's. You should recognize the "pipe operator" `%>%` from the 
 ```{r}
 
 # Your code here
-
+penguins<- penguins %>%
+na.omit
 ```
 
 
@@ -150,7 +155,8 @@ In that case we can plot the data as a scatterplot (`geom_point()`)with
 
 ```{r}
 # Here your code
-
+ggplot() +
+geom_point(data =penguins, aes(x= flipper_length_mm, y= bill_length_mm))
 ```
 
 
@@ -166,7 +172,8 @@ We could experiment a bit with adding colors and shapes to this plot by trying t
 ```{r}
 
 # Here your code
-
+ggplot() +
+  geom_point(data =penguins, aes(x= flipper_length_mm, y= bill_length_mm), color= "red", size= 3 , shape= 1)
 
 ```
 
@@ -181,7 +188,8 @@ It seems that there is a positive correlation between flipper length and bill le
 
 ```{r}
 # Here your code
-
+ggplot() +
+  geom_point(data =penguins, aes(x= flipper_length_mm, y= bill_length_mm, color= species, shape= sex), color= "red", size= 3 , shape= 1)
 ```
 
 
@@ -202,7 +210,9 @@ Finally,  we can add a theme (you can find some examples at https://ggplot2.tidy
 ```{r}
 
 # Here your code
-
+ggplot() +
+  geom_point(data =penguins, aes(x= flipper_length_mm, y= bill_length_mm, color = species, shape = sex), color= "red", size= 3 , shape= 1) +
+  theme_bw()
 ```
 
 
@@ -231,7 +241,9 @@ We can split the plots per island by using for example
 
 ```{r}
 # Here your code
-
+ggplot() +
+  geom_boxplot(data= penguins, aes(x= species, y= body_mass_g, fill= sex)) +
+  labs(y="body mass in grams")
 
 ```
 
@@ -255,7 +267,11 @@ _hint_: Why does scale_color_manual not work?
 
 ```{r}
 # Here your code
+ggplot() +
+  geom_boxplot(data= penguins, aes(x= species, y= body_mass_g, fill= sex, colour= sex)) +
+  labs(y="body mass in grams")
 
+  
 
 ```
 
